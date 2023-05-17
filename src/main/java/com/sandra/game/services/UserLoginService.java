@@ -4,34 +4,61 @@ import com.sandra.game.entities.User;
 import com.sandra.game.exceptions.InsertFailedException;
 import com.sandra.game.exceptions.NotFoundException;
 import com.sandra.game.repositories.UserRepository;
-import org.springframework.data.crossstore.ChangeSetPersister;
+import com.sandra.game.requests.NewUserForm;
+import com.sandra.game.requests.UserLogin;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserLoginService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserLoginService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    public void createUser(NewUserForm form) {
 
-    public User update(User user){
+        String name = form.getNickname();
+        String email = form.getEmail();
+        String password = form.getPassword();
+        String ponyImage = form.getPonyImg();
+
+        var encodedPassword = passwordEncoder.encode(password);
+
+        User user = new User(name, email, encodedPassword, ponyImage);
+
         try {
-            return userRepository.save(user);
-        } catch (Exception ex){
+            userRepository.save(user);
+        } catch (Exception ex) {
             throw new InsertFailedException("Could not insert new user into the database");
         }
     }
 
-    public Optional<User> searchUser(String id){
+    public User tryDoLogin(UserLogin form){
+
+        String username = form.getUser();
+        String password = form.getPassword();
+
+        var encodedPassword = passwordEncoder.encode(password);
+
+        User user = searchLoginUser(username, encodedPassword);
+
+        if(!passwordEncoder.matches(password, user.getPassword()))
+        {
+            throw new NotFoundException();
+        }
+        return user;
+    }
+
+    public Optional<User> searchUser(String id) {
         return userRepository.findById(id);
     }
 
-    public User searchLoginUser(String user, String encodedPassword) {
-        if (user.contains("@"))  return searchByEmail(user);
+    private User searchLoginUser(String user, String encodedPassword) {
+        if (user.contains("@")) return searchByEmail(user);
         return searchByName(user);
     }
 

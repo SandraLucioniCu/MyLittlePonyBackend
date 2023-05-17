@@ -24,21 +24,11 @@ import javax.servlet.http.HttpSession;
 public class LoginController {
 
     private final UserLoginService userLoginService;
-    private final PasswordEncoder passwordEncoder;
-
 
     @PostMapping(value="/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> singUp(@RequestBody NewUserForm request){
 
-        String name = request.getNickname();
-        String email = request.getEmail();
-        String password = request.getPassword();
-        String ponyImage = request.getPonyImg();
-
-        var encodedPassword = passwordEncoder.encode(password);
-
-       User user = new User(name, email, encodedPassword, ponyImage);
-       userLoginService.update(user);
+        userLoginService.createUser(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Created");
     }
@@ -46,20 +36,10 @@ public class LoginController {
     @PostMapping(value="/enter", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> login(@RequestBody UserLogin request, HttpServletRequest sessionRequest) throws NotFoundException {
 
-        String user = request.getUser();
-        String password = request.getPassword();
-
-        var encodedPassword = passwordEncoder.encode(password);
-
-        User userSession = userLoginService.searchLoginUser(user, encodedPassword);
-
-        if(!passwordEncoder.matches(password, userSession.getPassword()))
-        {
-            throw new NotFoundException();
-        }
+        User user = userLoginService.tryDoLogin(request);
 
         HttpSession session = sessionRequest.getSession();
-        session.setAttribute("user", userSession.getId());
-        return ResponseEntity.ok(userSession.getId());
+        session.setAttribute("user", user.getId());
+        return ResponseEntity.ok(user.getId());
     }
 }
