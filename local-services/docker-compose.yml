@@ -1,0 +1,55 @@
+version: '3.9'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-little-pony-game-server
+    hostname: mlpg
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    networks:
+      - mlpg-network
+
+  mongodb:
+    image: mongo:5.0
+    container_name: "mongodb"
+    hostname: mongo-host
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=game
+    ports:
+      - "27017:27017"
+    networks:
+      - mlpg-network
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    networks:
+      - mlpg-network
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: mongoadmin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: secret
+      ME_CONFIG_MONGODB_URL: mongodb://mongoadmin:secret@mongo-host:27017/
+
+  elasticsearch:
+    image: elasticsearch:8.0.0
+    container_name: "elasticsearch"
+    hostname: "elastic-host"
+    ports:
+      - "9200:9200"
+    networks:
+      - mlpg-network
+
+networks:
+  mlpg-network:
+    driver: bridge

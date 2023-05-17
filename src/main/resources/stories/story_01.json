@@ -1,0 +1,33 @@
+{
+  "chapter_01": {
+    "settings": {
+      "background": "background_chapter01.png"
+    },
+    "scene_01": {
+      "condition": {},
+      "text": "lorem ipsum",
+      "answers": [
+        {
+          "text": "Si",
+          "changes": {
+            "fun": 5,
+            "knowledge": 3,
+            "popularity": -2
+          },
+          "go": "scene_02_a"
+        },
+        {
+          "text": "Si",
+          "changes": {
+            "fun": -2,
+            "knowledge": 3,
+            "popularity": 2
+          },
+          "go": "scene_02_b"
+        }
+      ]
+    },
+    "scene_02_a": {
+    }
+  }
+}

@@ -1,0 +1,17 @@
+https://biblioteca.sistedes.es/submissions/uploaded-files/JISBD_2017_paper_71.pdf
+https://learn.microsoft.com/es-es/sql/relational-databases/json/json-data-sql-server?view=sql-server-ver16
+https://es.reactjs.org/tutorial/tutorial.html
+https://jasonwatmore.com/post/2020/01/27/react-fetch-http-get-request-examples
+https://blog.pcollaog.cl/2015/08/02/cheked-y-unchecked-exception/
+
+ ```react
+ {/*<form action="#" method="post">
+                             <h1>Iniciar Sesión</h1>
+                             <div className="register-container">
+                                 <img src="../../img/profiles/general.jpg" />
+                             </div>
+                             <Input type="text" holder="example@example.com" />
+                             <Input type="password" holder="*******" />
+                             <Button class="button-default" name={"Entrar"} click={doLogin}/>
+                         </form>*/}
+ ```
