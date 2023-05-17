@@ -3,6 +3,7 @@ package com.sandra.game.services;
 import com.sandra.game.entities.User;
 import com.sandra.game.exceptions.InsertFailedException;
 import com.sandra.game.exceptions.NotFoundException;
+import com.sandra.game.exceptions.UserAlreadyExistsException;
 import com.sandra.game.repositories.UserRepository;
 import com.sandra.game.requests.NewUserForm;
 import com.sandra.game.requests.UserLogin;
@@ -26,6 +27,10 @@ public class UserLoginService {
         String password = form.getPassword();
         String ponyImage = form.getPonyImg();
 
+        if(userRepository.findByEmail(email).isPresent()){
+            throw new UserAlreadyExistsException(email);
+        }
+
         var encodedPassword = passwordEncoder.encode(password);
 
         User user = new User(name, email, encodedPassword, ponyImage);
@@ -42,14 +47,13 @@ public class UserLoginService {
         String username = form.getUser();
         String password = form.getPassword();
 
-        var encodedPassword = passwordEncoder.encode(password);
-
-        User user = searchLoginUser(username, encodedPassword);
+        User user = searchLoginUser(username);
 
         if(!passwordEncoder.matches(password, user.getPassword()))
         {
             throw new NotFoundException();
         }
+        
         return user;
     }
 
@@ -57,7 +61,7 @@ public class UserLoginService {
         return userRepository.findById(id);
     }
 
-    private User searchLoginUser(String user, String encodedPassword) {
+    private User searchLoginUser(String user) {
         if (user.contains("@")) return searchByEmail(user);
         return searchByName(user);
     }

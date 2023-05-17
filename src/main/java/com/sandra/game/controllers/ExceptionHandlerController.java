@@ -3,6 +3,7 @@ package com.sandra.game.controllers;
 import com.sandra.game.exceptions.InsertFailedException;
 import com.sandra.game.exceptions.NotAuthorizedException;
 import com.sandra.game.exceptions.NotFoundException;
+import com.sandra.game.exceptions.UserAlreadyExistsException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,5 +26,10 @@ public class ExceptionHandlerController {
     @ExceptionHandler({NotAuthorizedException.class})
     public final ResponseEntity<String> HandleNotAuthorizedException(Exception ex, WebRequest request){
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+
+    @ExceptionHandler({UserAlreadyExistsException.class})
+    public final ResponseEntity<String> HandleUserAlreadyExitsException(Exception ex, WebRequest request){
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 }
