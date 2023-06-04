@@ -1,33 +1,189 @@
 {
-  "chapter_01": {
-    "settings": {
-      "background": "background_chapter01.png"
-    },
+  "settings": {
+    "background": "background_chapter01.png",
+    "init": "scene_01",
+    "stats": {
+      "fun": 25,
+      "knowledge": 25,
+      "popularity": 25
+    }
+  },
+  "scenes": {
     "scene_01": {
       "condition": {},
-      "text": "lorem ipsum",
+      "text": "'Por fin he llegado a Pony Ville después de tanto viaje, estoy agotada'. Se acerca a ti un pony de color rosa, se presenta de forma bastante efusiva, te hace tantas preguntas que no sabes qué responder.Parece alguien bastante amable, pero muy intensa. '¿Quieres que nos conozcamos mejor?'",
       "answers": [
         {
           "text": "Si",
           "changes": {
             "fun": 5,
-            "knowledge": 3,
-            "popularity": -2
+            "knowledge": 0,
+            "popularity": 1
           },
           "go": "scene_02_a"
         },
         {
-          "text": "Si",
+          "text": "No",
           "changes": {
             "fun": -2,
-            "knowledge": 3,
-            "popularity": 2
+            "knowledge": 1,
+            "popularity": 0
           },
           "go": "scene_02_b"
         }
       ]
     },
     "scene_02_a": {
+      "condition": {},
+      "text": "Te diriges hacia donde te vas a quedar, dejas tus cosas y te tumbas en la cama. Piensas en todo lo que tienes que hacer... de repente, alguien toca tu puerta: 'Hola me llamo Twiligth, he visto que acabas de llegar y me preguntaba si necesitabas ayuda con algo.' ",
+      "answers": [
+        {
+          "text": "Si",
+          "changes": {
+            "fun": 1,
+            "knowledge": 2,
+            "popularity": 2
+          },
+          "go": "scene_03_a"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": 0,
+            "knowledge": 2,
+            "popularity": -1
+          },
+          "go": "scene_03_a"
+        }
+      ]
+    },
+    "scene_02_b": {
+      "condition": {},
+      "text": "Pinkie Pie es su nombre. Te ayuda a llevar las cosas a tu nueva casa y te trae algo de comer, tan rápido que no te da tiempo a asimilarlo. 'Hay cola para el mejor zumo de la ciudad, ¡Te recomiendo ir!'",
+      "answers": [
+        {
+          "text": "Si",
+          "changes": {
+            "fun": 5,
+            "knowledge": 2,
+            "popularity": 1
+          },
+          "go": "scene_03_b"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": -1
+          },
+          "go": "scene_03_b"
+        }
+      ]
+    },
+    "scene_03_a": {
+      "condition": {},
+      "text": "Twilight se despide y te quedas solx otra vez. Terminas de hacer tus cosas y sales fuera a conocer la ciudad y comer algo porque estás hambrienta. Te diriges hacia una granja donde venden una gran variedad de fruta y donde ves que hay una larga cola, pregunta que ocurre y te comentan que es temporada de zumo y decides quedarte a probar. A la media hora de esperar ves que todos se enfadan, y al parecer es porque la cantidad que producen no es suficiente para todo el mundo. Aparecen unos ponys con un carro que se mueve solo, jamás viste esto y te quedas emocionada, funciona a vapor. Comienza a hacer una disputa, al parecer estos dos mercaderes ofrecen realizar la producción si se quedan el 70% de las ganancias. ¡Qué osados!, ellos no hacen nada mientras esa familia realiza la mayoría del trabajo. Pero el resto de ponys solo ven por su propio estómago y no piensan en cómo les podría afectar a ellos, auqnue tú también te ves tentada, ya que no llegaste a estar ni cerca de poder probarlo. ",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {},
+          "go": "scene_04"
+        },
+        {
+          "text": "Vale",
+          "changes": {},
+          "go": "scene_04"
+        }
+      ]
+    },
+    "scene_03_b": {
+      "condition": {},
+      "text": "Pinkie Pie se despide y te diriges hacia la granja donde está la larga cola. A la media hora de esperar ves que todos se enfadan, y al parecer es porque la cantidad que producen no es suficiente para todo el mundo. Aparecen unos ponys con un carro que se mueve solo, jamás viste esto y te quedas emocionada, funciona a vapor. Comienza a hacer una disputa, al parecer estos dos mercaderes ofrecen realizar la producción si se quedan el 70% de las ganancias. ¡Qué osados!, ellos no hacen nada mientras esa familia realiza la mayoría del trabajo. Pero el resto de ponys solo velan por ellos mismos y no piensan en cómo les podría afectar a ellos, aunque tú también te ves tentada, ya que no llegaste a estar ni cerca de poder probarlo. ",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {},
+          "go": "scene_04"
+        },
+        {
+          "text": "Vale",
+          "changes": {},
+          "go": "scene_04"
+        }
+      ]
+    },
+    "scene_04": {
+      "condition": {},
+      "text": "Todo ocurre muy rápido y al parecer han quedado en hacer un concurso de producción y quién gane se lleva el terreno. ¿Debería hacer una intervención para hablar de la injusticia y abuso de poder?",
+      "answers": [
+        {
+          "text": "Si",
+          "changes": {
+            "fun": 0,
+            "knowledge": 5,
+            "popularity": -1
+          },
+          "go": "scene_05_a"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": 0,
+            "knowledge": 1,
+            "popularity": 5
+          },
+          "go": "scene_05_b"
+        }
+      ]
+    },
+    "scene_05_a": {
+      "condition": {},
+      "text": "'¡Qué injusticia! ¿De verdad ponys os parece normal el trato que se ofrece aquí? Así no se hacen las cosas, deberíamos ser más amables con quienes trabajan la tierra.' No consigues mucho, la turba de ponys se pone en contra tuya. ¿Debería ofrecer mi ayuda a los agricultores?",
+      "answers": [
+        {
+          "text": "Si",
+          "changes": {
+            "fun": 1,
+            "knowledge": 3,
+            "popularity": 2
+          },
+          "go": "scene_06_a"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": 0,
+            "knowledge": 2,
+            "popularity": 2
+          },
+          "go": "scene_06_b"
+        }
+      ]
+    },
+    "scene_05_b": {
+      "condition": {},
+      "text": "Ante la discusión que has creado y la presión de los demás ponys, la familia acepta un reto donde se juegan el destierro, bajo la frase de 'Si no pueden alimentar a todos no merecen estar aquí'. ¿Debería ofrecerles mi ayuda?",
+      "answers": [
+        {
+          "text": "Si",
+          "changes": {
+            "fun": 1,
+            "knowledge": 3,
+            "popularity": 3
+          },
+          "go": "scene_06_a"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": 0,
+            "knowledge": 1,
+            "popularity": 1
+          },
+          "go": "scene_06_b"
+        }
+      ]
     }
   }
 }
