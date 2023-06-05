@@ -13,6 +13,15 @@ import java.util.HashMap;
 @Getter
 public class Story {
 
+    @JsonProperty("id")
+    private String id;
+
+    @JsonProperty("title")
+    private String title;
+
+    @JsonProperty("description")
+    private String description;
+
     @JsonProperty("settings")
     private Settings settings;
 

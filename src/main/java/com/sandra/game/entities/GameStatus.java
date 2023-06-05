@@ -26,6 +26,8 @@ public class GameStatus {
 
     @Indexed()
     private String userId;
+    @Indexed()
+    private String storyId;
 
     private String currentScene;
     private boolean isFinished;
@@ -35,8 +37,9 @@ public class GameStatus {
     @CreatedDate
     private Date date;
 
-    public GameStatus(String userId, String currentScene, Statistics statistics) {
+    public GameStatus(String userId, String storyId, String currentScene, Statistics statistics) {
         this.userId = userId;
+        this.storyId = storyId;
         this.currentScene = currentScene;
         this.statistics = statistics;
         this.isFinished = false;

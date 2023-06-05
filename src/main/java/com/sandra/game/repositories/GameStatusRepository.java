@@ -10,4 +10,6 @@ import java.util.List;
 public interface GameStatusRepository extends MongoRepository<GameStatus, String> {
 
     List<GameStatus> findByUserId(String id);
+
+    List<GameStatus> findByUserIdAndStoryId(String userId, String storyId);
 }

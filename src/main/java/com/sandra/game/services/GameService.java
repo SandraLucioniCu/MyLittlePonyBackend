@@ -26,13 +26,13 @@ public class GameService {
 
     private final GameStatusRepository gameStatusRepository;
 
-    public GameStatusDto getGameStatus(String userId) throws FileNotFoundException, ParseException {
+    public GameStatusDto getGameStatus(String userId, String storyId) throws FileNotFoundException, ParseException {
 
         // busca en la base de datos si existen partidas empezadas
         List<GameStatus> games = gameStatusRepository.findByUserId(userId);
         Optional<GameStatus> optionalGame = games.stream().filter(game -> !game.isFinished()).findFirst();
 
-        Story story = getStoryFromResources();
+        Story story = getStoryFromResources(storyId);
 
         // si existen
         if(optionalGame.isPresent()){
@@ -59,6 +59,7 @@ public class GameService {
         // insertar el nuevo game status
         GameStatus newGameStatus = new GameStatus(
                 userId,
+                storyId,
                 initScene,
                 initStats.ToMongoDbData()
         );
@@ -71,21 +72,20 @@ public class GameService {
                 currentScene.getAnswersAsDto());
     }
 
-    public GameStatusDto updateGameStatus(String userId, int option) throws FileNotFoundException, ParseException {
+    public GameStatusDto updateGameStatus(String userId,  String storyId, int option) throws FileNotFoundException, ParseException {
         // busca en la base de datos si existen partidas empezadas
-        List<GameStatus> games = gameStatusRepository.findByUserId(userId);
+        List<GameStatus> games = gameStatusRepository.findByUserIdAndStoryId(userId, storyId);
         Optional<GameStatus> optionalGame = games.stream().filter(game -> !game.isFinished()).findFirst();
 
         // si existen
         if(optionalGame.isEmpty()){
-
             throw new NotFoundException();
         }
 
         GameStatus gameStatus = optionalGame.get();
 
         // coger nombre de la scena del objeto que devuelve la base de datos y los stats
-        Story story = getStoryFromResources();
+        Story story = getStoryFromResources(storyId);
         String currentSceneId = gameStatus.getCurrentScene();
 
         // buscar en el json de escenas el nombre de la escena
@@ -119,9 +119,9 @@ public class GameService {
         );
     }
 
-    private Story getStoryFromResources() throws FileNotFoundException, ParseException {
+    private Story getStoryFromResources(String storyId) throws FileNotFoundException, ParseException {
         // carga la historia de la carpeta resources
-        File file = ResourceUtils.getFile("classpath:stories/story_01.json");
+        File file = ResourceUtils.getFile("classpath:stories/" + storyId);
 
         // transforma el archivo json en un objeto de Java (generalmente es un LinkedHashMap
         Object json = new JSONParser(new FileInputStream(file)).parse();

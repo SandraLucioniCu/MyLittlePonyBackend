@@ -9,10 +9,7 @@ import org.apache.tomcat.util.json.ParseException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -28,7 +25,7 @@ public class GameController {
     // endpoint para recoger el estado del jugador en la partida
     // si no tiene partida empezada, crear una nueva
     @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GameStatusDto> getGameStatus(HttpServletRequest sessionRequest)
+    public ResponseEntity<GameStatusDto> getGameStatus(HttpServletRequest sessionRequest, @RequestParam String storyId)
             throws FileNotFoundException, ParseException {
 
         // recoger user id
@@ -39,7 +36,7 @@ public class GameController {
             throw new NotAuthorizedException();
         }
 
-        return ResponseEntity.ok(gameService.getGameStatus(userId));
+        return ResponseEntity.ok(gameService.getGameStatus(userId, storyId));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -54,6 +51,6 @@ public class GameController {
             throw new NotAuthorizedException();
         }
 
-        return ResponseEntity.ok(gameService.updateGameStatus(userId, request.getAnswerIndex()));
+        return ResponseEntity.ok(gameService.updateGameStatus(userId, request.getStoryId(), request.getAnswerIndex()));
     }
 }

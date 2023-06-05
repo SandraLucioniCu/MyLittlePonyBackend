@@ -1,4 +1,7 @@
 {
+  "id": "story_01.json",
+  "title": "¡Bienvenido a PonyVille!",
+  "description": "Una introducción al mundo de My Little Pony",
   "settings": {
     "background": "background_chapter01.png",
     "init": "scene_01",
@@ -14,19 +17,19 @@
       "text": "'Por fin he llegado a Pony Ville después de tanto viaje, estoy agotada'. Se acerca a ti un pony de color rosa, se presenta de forma bastante efusiva, te hace tantas preguntas que no sabes qué responder.Parece alguien bastante amable, pero muy intensa. '¿Quieres que nos conozcamos mejor?'",
       "answers": [
         {
-          "text": "Si",
+          "text": "Sí",
           "changes": {
-            "fun": 5,
+            "fun": 10,
             "knowledge": 0,
-            "popularity": 1
+            "popularity": 5
           },
           "go": "scene_02_a"
         },
         {
           "text": "No",
           "changes": {
-            "fun": -2,
-            "knowledge": 1,
+            "fun": -5,
+            "knowledge": 5,
             "popularity": 0
           },
           "go": "scene_02_b"
@@ -38,11 +41,11 @@
       "text": "Te diriges hacia donde te vas a quedar, dejas tus cosas y te tumbas en la cama. Piensas en todo lo que tienes que hacer... de repente, alguien toca tu puerta: 'Hola me llamo Twiligth, he visto que acabas de llegar y me preguntaba si necesitabas ayuda con algo.' ",
       "answers": [
         {
-          "text": "Si",
+          "text": "Sí",
           "changes": {
-            "fun": 1,
-            "knowledge": 2,
-            "popularity": 2
+            "fun": 5,
+            "knowledge": 5,
+            "popularity": 5
           },
           "go": "scene_03_a"
         },
@@ -50,8 +53,8 @@
           "text": "No",
           "changes": {
             "fun": 0,
-            "knowledge": 2,
-            "popularity": -1
+            "knowledge": 5,
+            "popularity": -5
           },
           "go": "scene_03_a"
         }
@@ -62,11 +65,11 @@
       "text": "Pinkie Pie es su nombre. Te ayuda a llevar las cosas a tu nueva casa y te trae algo de comer, tan rápido que no te da tiempo a asimilarlo. 'Hay cola para el mejor zumo de la ciudad, ¡Te recomiendo ir!'",
       "answers": [
         {
-          "text": "Si",
+          "text": "Sí",
           "changes": {
-            "fun": 5,
-            "knowledge": 2,
-            "popularity": 1
+            "fun": 10,
+            "knowledge": 5,
+            "popularity": 5
           },
           "go": "scene_03_b"
         },
@@ -75,7 +78,7 @@
           "changes": {
             "fun": 0,
             "knowledge": 0,
-            "popularity": -1
+            "popularity": -5
           },
           "go": "scene_03_b"
         }
@@ -83,32 +86,96 @@
     },
     "scene_03_a": {
       "condition": {},
-      "text": "Twilight se despide y te quedas solx otra vez. Terminas de hacer tus cosas y sales fuera a conocer la ciudad y comer algo porque estás hambrienta. Te diriges hacia una granja donde venden una gran variedad de fruta y donde ves que hay una larga cola, pregunta que ocurre y te comentan que es temporada de zumo y decides quedarte a probar. A la media hora de esperar ves que todos se enfadan, y al parecer es porque la cantidad que producen no es suficiente para todo el mundo. Aparecen unos ponys con un carro que se mueve solo, jamás viste esto y te quedas emocionada, funciona a vapor. Comienza a hacer una disputa, al parecer estos dos mercaderes ofrecen realizar la producción si se quedan el 70% de las ganancias. ¡Qué osados!, ellos no hacen nada mientras esa familia realiza la mayoría del trabajo. Pero el resto de ponys solo ven por su propio estómago y no piensan en cómo les podría afectar a ellos, auqnue tú también te ves tentada, ya que no llegaste a estar ni cerca de poder probarlo. ",
+      "text": "Twilight se despide y te quedas solx otra vez. Terminas de hacer tus cosas y sales fuera a conocer la ciudad y comer algo porque estás hambrienta. Te diriges hacia una granja donde venden una gran variedad de fruta y donde ves que hay una larga cola, pregunta que ocurre y te comentan que es temporada de zumo y decides quedarte a probar. A la media hora de esperar ves que todos se enfadan, y al parecer es porque la cantidad que producen no es suficiente para todo el mundo.",
       "answers": [
         {
           "text": "Vale",
-          "changes": {},
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_03_a_2"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_03_a_2"
+        }
+      ]
+    },
+    "scene_03_a_2": {
+      "condition": {},
+      "text": "Aparecen unos ponys con un carro que se mueve solo, jamás viste esto y te quedas emocionada, funciona a vapor. Comienza a hacer una disputa, al parecer estos dos mercaderes ofrecen realizar la producción si se quedan el 70% de las ganancias. ¡Qué osados!, ellos no hacen nada mientras esa familia realiza la mayoría del trabajo. Pero el resto de ponys solo ven por su propio estómago y no piensan en cómo les podría afectar a ellos, auqnue tú también te ves tentada, ya que no llegaste a estar ni cerca de poder probarlo.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
           "go": "scene_04"
         },
         {
           "text": "Vale",
-          "changes": {},
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
           "go": "scene_04"
         }
       ]
     },
     "scene_03_b": {
       "condition": {},
-      "text": "Pinkie Pie se despide y te diriges hacia la granja donde está la larga cola. A la media hora de esperar ves que todos se enfadan, y al parecer es porque la cantidad que producen no es suficiente para todo el mundo. Aparecen unos ponys con un carro que se mueve solo, jamás viste esto y te quedas emocionada, funciona a vapor. Comienza a hacer una disputa, al parecer estos dos mercaderes ofrecen realizar la producción si se quedan el 70% de las ganancias. ¡Qué osados!, ellos no hacen nada mientras esa familia realiza la mayoría del trabajo. Pero el resto de ponys solo velan por ellos mismos y no piensan en cómo les podría afectar a ellos, aunque tú también te ves tentada, ya que no llegaste a estar ni cerca de poder probarlo. ",
+      "text": "Pinkie Pie se despide y te diriges hacia la granja donde está la larga cola. A la media hora de esperar ves que todos se enfadan, y al parecer es porque la cantidad que producen no es suficiente para todo el mundo. Aparecen unos ponys con un carro que se mueve solo, jamás viste esto y te quedas emocionada, funciona a vapor.",
       "answers": [
         {
           "text": "Vale",
-          "changes": {},
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_03_b_2"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_03_b_2"
+        }
+      ]
+    },
+    "scene_03_b_2": {
+      "condition": {},
+      "text": "Comienza a hacer una disputa, al parecer estos dos mercaderes ofrecen realizar la producción si se quedan el 70% de las ganancias. ¡Qué osados!, ellos no hacen nada mientras esa familia realiza la mayoría del trabajo. Pero el resto de ponys solo velan por ellos mismos y no piensan en cómo les podría afectar a ellos, aunque tú también te ves tentada, ya que no llegaste a estar ni cerca de poder probarlo.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
           "go": "scene_04"
         },
         {
           "text": "Vale",
-          "changes": {},
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
           "go": "scene_04"
         }
       ]
@@ -118,11 +185,11 @@
       "text": "Todo ocurre muy rápido y al parecer han quedado en hacer un concurso de producción y quién gane se lleva el terreno. ¿Debería hacer una intervención para hablar de la injusticia y abuso de poder?",
       "answers": [
         {
-          "text": "Si",
+          "text": "Sí",
           "changes": {
             "fun": 0,
-            "knowledge": 5,
-            "popularity": -1
+            "knowledge": 10,
+            "popularity": -5
           },
           "go": "scene_05_a"
         },
@@ -130,8 +197,8 @@
           "text": "No",
           "changes": {
             "fun": 0,
-            "knowledge": 1,
-            "popularity": 5
+            "knowledge": 5,
+            "popularity": 10
           },
           "go": "scene_05_b"
         }
@@ -142,11 +209,11 @@
       "text": "'¡Qué injusticia! ¿De verdad ponys os parece normal el trato que se ofrece aquí? Así no se hacen las cosas, deberíamos ser más amables con quienes trabajan la tierra.' No consigues mucho, la turba de ponys se pone en contra tuya. ¿Debería ofrecer mi ayuda a los agricultores?",
       "answers": [
         {
-          "text": "Si",
+          "text": "Sí",
           "changes": {
-            "fun": 1,
-            "knowledge": 3,
-            "popularity": 2
+            "fun": 0,
+            "knowledge": 10,
+            "popularity": 5
           },
           "go": "scene_06_a"
         },
@@ -154,8 +221,8 @@
           "text": "No",
           "changes": {
             "fun": 0,
-            "knowledge": 2,
-            "popularity": 2
+            "knowledge": -5,
+            "popularity": 5
           },
           "go": "scene_06_b"
         }
@@ -163,14 +230,14 @@
     },
     "scene_05_b": {
       "condition": {},
-      "text": "Ante la discusión que has creado y la presión de los demás ponys, la familia acepta un reto donde se juegan el destierro, bajo la frase de 'Si no pueden alimentar a todos no merecen estar aquí'. ¿Debería ofrecerles mi ayuda?",
+      "text": "Ante la discusión que has creado y la presión de los demás ponys, la familia acepta un reto donde se juegan el destierro, bajo la frase de 'Sí no pueden alimentar a todos no merecen estar aquí'. ¿Debería ofrecerles mi ayuda?",
       "answers": [
         {
-          "text": "Si",
+          "text": "Sí",
           "changes": {
-            "fun": 1,
-            "knowledge": 3,
-            "popularity": 3
+            "fun": 0,
+            "knowledge": 10,
+            "popularity": 5
           },
           "go": "scene_06_a"
         },
@@ -178,10 +245,322 @@
           "text": "No",
           "changes": {
             "fun": 0,
-            "knowledge": 1,
-            "popularity": 1
+            "knowledge": 5,
+            "popularity": -5
           },
           "go": "scene_06_b"
+        }
+      ]
+    },
+    "scene_06_a": {
+      "condition": {},
+      "text": "Les ofreces tu ayuda, la cual rechazan ya que era algo de la familia y prefieren que te mantengas al margen para no salpicar a nadie más. Te retiras y el resto del grupo de ponys se acercan a ti y te agradecen el apoyo a su amiga, preguntas: '¿Las mejores amigas no forman también parte de la familia?'",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_07"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_07"
+        }
+      ]
+    },
+    "scene_06_b": {
+      "condition": {},
+      "text": "Te retiras y el resto del grupo de ponys se acercan a ti para presentarse, ¿Quieres conocerlas mejor?",
+      "answers": [
+        {
+          "text": "Sí",
+          "changes": {
+            "fun": 5,
+            "knowledge": 0,
+            "popularity": 5
+          },
+          "go": "scene_08_a"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": -5,
+            "knowledge": -5,
+            "popularity": -5
+          },
+          "go": "scene_08_b"
+        }
+      ]
+    },
+    "scene_07": {
+      "condition": {},
+      "text": "A la mañana siguiente, os reunís todas las ponys para decirle a AppleJack que vais a ayudar porque sois familia. Claro que, tú no pintas mucho ahí, pero recuerdas que eres periodista y que podrías ayudar de una forma diferente. ¿Completamos la investigación espianado a los hermanos?",
+      "answers": [
+        {
+          "text": "Sí",
+          "changes": {
+            "fun": 5,
+            "knowledge": 5,
+            "popularity": 0
+          },
+          "go": "scene_09_a"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": 0,
+            "knowledge": 5,
+            "popularity": 5
+          },
+          "go": "scene_09_b"
+        }
+      ]
+    },
+    "scene_08_a": {
+      "condition": {},
+      "text": "Pasáis la noche juntas, les cuentas que eres periodista y que te enviaron aquí para cubir las noticias en Pony Ville durante un tiempo indeterminado. Empiezas a recordar todo lo que dejaste atrás y cae una lágrima. Te consuelan pero quieres retirarte a dormir, muchas emociones para ti hoy.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_10"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_10"
+        }
+      ]
+    },
+    "scene_08_b": {
+      "condition": {},
+      "text": "Te excusas y te vas a tu casa, mañana te toca empezar a trabajar y estás agotada. No sabes si dejarlo para la semana siguiente, para instalarte e ir conociendo el barrio, habrá que consultarlo con la almohada: ¿Empiezo dentro de una semana?, coincide justo con el torneo de zumos.",
+      "answers": [
+        {
+          "text": "Sí",
+          "changes": {
+            "fun": 5,
+            "knowledge": 0,
+            "popularity": 5
+          },
+          "go": "scene_10"
+        },
+        {
+          "text": "No",
+          "changes": {
+            "fun": -5,
+            "knowledge": -5,
+            "popularity": -5
+          },
+          "go": "scene_11"
+        }
+      ]
+    },
+    "scene_09_a": {
+      "condition": {},
+      "text": "Preparas tu mochila de espionaje, no habías sentido esas cosquillas por un artículo jugoso, desde hace tiempo. Te diriges hacia donde están trabajando y día tras día, durante una semana; sacas fotos, grabas alguna consersación. Estás preparada para publicarlo todo.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_12"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "scene_12"
+        }
+      ]
+    },
+    "scene_09_b": {
+      "condition": {},
+      "text": "Pasas la semana escribiendo sobre el trabajo que realizan y entrevistando a los ponys de Pony Ville, también a los hermanos. Solo queda cubrir el día del evento, mañana es el gran día y tienes que descansar para poder ver bien todo el panorama.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 5,
+            "knowledge": 5,
+            "popularity": 5
+          },
+          "go": "scene_final_c"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 5,
+            "knowledge": 5,
+            "popularity": 5
+          },
+          "go": "scene_final_c"
+        }
+      ]
+    },
+    "scene_10": {
+      "condition": {},
+      "text": "Decides que mejor no trabajar el resto de la semana, prefieres documentarte antes, en cómo es la población para no hacer artículos que no vayan a gustar. Cubrirás el evento del zumo pero sin posicionamiento. Será lo mejor para todos.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": -10,
+            "knowledge": -10,
+            "popularity": -10
+          },
+          "go": "scene_final_a"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": -10,
+            "knowledge": -10,
+            "popularity": -10
+          },
+          "go": "scene_final_a"
+        }
+      ]
+    },
+    "scene_11": {
+      "condition": {},
+      "text": "Vas a cubrir la noticia una semana antes para averiguar qué ocure y que opinan todos. Un día piensas que podrías entrevistar también a los hermanos o espiarlos...",
+      "answers": [
+        {
+          "text": "Espiar",
+          "changes": {
+            "fun": 5,
+            "knowledge": 10,
+            "popularity": 0
+          },
+          "go": "scene_09_a"
+        },
+        {
+          "text": "Entrevistar",
+          "changes": {
+            "fun": 5,
+            "knowledge": 5,
+            "popularity": 5
+          },
+          "go": "scene_09_b"
+        }
+      ]
+    },
+    "scene_12": {
+      "condition": {},
+      "text": "Te quedas esa noche en vela, escribes toda la información que tienes y así al día siguiente solo hay que rellenar con lo del día del evento. Estas emocionada porque has averiguado un montón de cosas: los hermanos son unos estafadoras, van de pueblo en pueblo explotando todos sus recursos, sacandole el último centavo a los ponys, y cuando no pueden extraer nada más de ellos, se van al siguiente. Hay que frenarles.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 10,
+            "knowledge": 10,
+            "popularity": 10
+          },
+          "go": "scene_final_b"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 10,
+            "knowledge": 10,
+            "popularity": 10
+          },
+          "go": "scene_final_b"
+        }
+      ]
+    },
+    "scene_final_a": {
+      "condition": {},
+      "text": "Ha pasado la semana y cubres el evento. No ganaron en la carrera de producción y se ven obligados a marcharse. No has establecido amistad con nadie, tu viaje no ha sido relevante.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "final"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": ""
+        }
+      ]
+    },
+    "scene_final_b": {
+      "condition": {},
+      "text": "Ha pasado el día y gracias a los apoyos de las amigas y la tuya por hablar del problema con todos los vecinos de Pony Ville, echaron a los hermanos. Ganaron en el concurso de producción, pero ¡a quién le importa! Mejos calidad a cantidad y mejor proteger a los tuyos que defender un sistema que echa a los que considera débiles.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "final"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": ""
+        }
+      ]
+    },
+    "scene_final_c": {
+      "condition": {},
+      "text": "Gracias a tus entrevistas y pláticas con los vecinos, el día fue un éxito. Fue toda Pony Ville, muchos vecinos vieron cómo trataban a sus vecinos, no era tolerable. No dejaron terminar el concurso, los echaron antes de saber nada. Si así trataban a sus rivales, ¿Cómo los tratarían a ellos? ¿Cuál sería el siguiente negocio en cerrar? No se podía permitir. Ahora la paz volvió.",
+      "answers": [
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": "final"
+        },
+        {
+          "text": "Vale",
+          "changes": {
+            "fun": 0,
+            "knowledge": 0,
+            "popularity": 0
+          },
+          "go": ""
         }
       ]
     }

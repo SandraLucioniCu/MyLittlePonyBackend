@@ -8,6 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateGameRequest {
 
+    @JsonProperty(value = "storyId")
+    private String storyId;
+
     @JsonProperty(value = "answerIndex")
     private int answerIndex;
 }

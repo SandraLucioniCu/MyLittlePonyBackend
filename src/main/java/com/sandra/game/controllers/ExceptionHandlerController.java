@@ -32,4 +32,9 @@ public class ExceptionHandlerController {
     public final ResponseEntity<String> HandleUserAlreadyExitsException(Exception ex, WebRequest request){
         return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
+
+    @ExceptionHandler({NoAvailableStoriesException.class})
+    public final ResponseEntity<String> HandleNoAvailableStoriesException(Exception ex, WebRequest request){
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }
