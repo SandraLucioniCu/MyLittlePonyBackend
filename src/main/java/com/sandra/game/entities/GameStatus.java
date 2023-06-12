@@ -37,6 +37,8 @@ public class GameStatus {
     @CreatedDate
     private Date date;
 
+    private Date endDate;
+
     public GameStatus(String userId, String storyId, String currentScene, Statistics statistics) {
         this.userId = userId;
         this.storyId = storyId;

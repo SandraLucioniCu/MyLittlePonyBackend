@@ -23,6 +23,9 @@ public class Scene {
     @JsonProperty("answers")
     private List<Answer> answers;
 
+    @JsonProperty("isEnd")
+    private boolean isEnd;
+
     public List<AnswerDto> getAnswersAsDto() {
         List<AnswerDto> dto = new ArrayList<>();
 

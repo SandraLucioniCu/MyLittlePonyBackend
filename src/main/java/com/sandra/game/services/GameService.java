@@ -5,7 +5,11 @@ import com.sandra.game.entities.Decision;
 import com.sandra.game.entities.GameStatus;
 import com.sandra.game.entities.Statistics;
 import com.sandra.game.exceptions.NotFoundException;
+import com.sandra.game.exceptions.SceneNotFoundException;
 import com.sandra.game.repositories.GameStatusRepository;
+import com.sandra.game.responses.DecisionDto;
+import com.sandra.game.responses.FinishedGameDto;
+import com.sandra.game.responses.GameHistoryDto;
 import com.sandra.game.responses.GameStatusDto;
 import com.sandra.game.stories.*;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +21,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -29,7 +32,7 @@ public class GameService {
     public GameStatusDto getGameStatus(String userId, String storyId) throws FileNotFoundException, ParseException {
 
         // busca en la base de datos si existen partidas empezadas
-        List<GameStatus> games = gameStatusRepository.findByUserId(userId);
+        List<GameStatus> games = gameStatusRepository.findByUserIdAndStoryId(userId, storyId);
         Optional<GameStatus> optionalGame = games.stream().filter(game -> !game.isFinished()).findFirst();
 
         Story story = getStoryFromResources(storyId);
@@ -46,7 +49,8 @@ public class GameService {
             return new GameStatusDto(
                     game.getStatistics().toDto(),
                     currentScene.getText(),
-                    currentScene.getAnswersAsDto());
+                    currentScene.getAnswersAsDto(),
+                    false);
         }
 
         // si no existe
@@ -69,7 +73,8 @@ public class GameService {
         return new GameStatusDto(
                 newGameStatus.getStatistics().toDto(),
                 currentScene.getText(),
-                currentScene.getAnswersAsDto());
+                currentScene.getAnswersAsDto(),
+                false);
     }
 
     public GameStatusDto updateGameStatus(String userId,  String storyId, int option) throws FileNotFoundException, ParseException {
@@ -90,6 +95,21 @@ public class GameService {
 
         // buscar en el json de escenas el nombre de la escena
         Scene currentScene = story.getSceneById(currentSceneId);
+
+        // si la escena es la ultima marcamos el game status como finalizado
+        if(currentScene.isEnd()){
+
+            gameStatus.setFinished(true);
+            gameStatus.setDate(new Date());
+            gameStatusRepository.save(gameStatus);
+
+            return new GameStatusDto(
+                    gameStatus.getStatistics().toDto(),
+                    "",
+                    Collections.emptyList(),
+                    true
+            );
+        }
 
         // devolver el texto, las respuestas y los stats
         Answer answerChosen = currentScene.getAnswers().get(option);
@@ -115,8 +135,81 @@ public class GameService {
         return new GameStatusDto(
                 gameStatus.getStatistics().toDto(),
                 nextScene.getText(),
-                nextScene.getAnswersAsDto()
+                nextScene.getAnswersAsDto(),
+                false
         );
+    }
+
+    public GameHistoryDto getFinishedGames(String userId) throws FileNotFoundException, ParseException {
+        // cogemos todos los juegos del usuario
+        List<GameStatus> games = gameStatusRepository.findByUserId(userId);
+
+        // buscamos los juegos ya finalizados y creamos un mapa de storyId:Story para acceder al json de manera sencilla
+        List<GameStatus> finishedGames = new ArrayList<>();
+        Map<String, Story> storiesById = new HashMap<>();
+        for (GameStatus game: games) {
+            if(game.isFinished()){
+                finishedGames.add(game);
+                // add el story al map si no existe
+                if(!storiesById.containsKey(game.getStoryId())){
+                    storiesById.put(game.getStoryId(), getStoryFromResources(game.getStoryId()));
+                }
+            }
+        }
+
+        List<FinishedGameDto> finishedGameDtos = new ArrayList<>();
+        for (GameStatus game: finishedGames) {
+
+            if(!storiesById.containsKey(game.getStoryId())){
+                System.out.println("La story " + game.getStoryId() + " no se ha encontrado en el mapa de historias. Se ignorara");
+                continue;
+            }
+
+            Story story = storiesById.get(game.getStoryId());
+            finishedGameDtos.add(createFinishedGameDto(game, story));
+        }
+
+        return new GameHistoryDto(finishedGameDtos);
+    }
+
+    private FinishedGameDto createFinishedGameDto(GameStatus game, Story story) {
+
+        List<DecisionDto> decisionDtos = new ArrayList<>();
+        for (Decision decision: game.getDecisions()) {
+
+            // creamos un optional de scene por que puede que sea nulo
+            Optional<Scene> sceneOptional = Optional.empty();
+
+            // getSceneById puede lanzar un SceneNotFoundException y en ese caso lo que queremos es ignorar el resultado
+            try{
+                sceneOptional = Optional.of(story.getSceneById(decision.sceneId));
+            }catch (SceneNotFoundException e){
+                System.out.println("Scene with id " + decision.sceneId + " not found in " + story.getId());
+            }
+
+            // si el Optional esta vacio significa que la escena no ha sido encontrada asique continuamos
+            if(sceneOptional.isEmpty())
+            {
+                continue;
+            }
+
+            Scene scene = sceneOptional.get();
+            Answer answer = scene.getAnswers().get(decision.getAnswer());
+            decisionDtos.add(new DecisionDto(
+                    scene.getText(),
+                    answer.getText(),
+                    decision.statsFrom.toDto(),
+                    decision.statsTo.toDto()
+            ));
+        }
+
+        return new FinishedGameDto(
+                game.getStoryId(),
+                story.getTitle(),
+                story.getDescription(),
+                game.getDate(),
+                game.getEndDate(),
+                decisionDtos);
     }
 
     private Story getStoryFromResources(String storyId) throws FileNotFoundException, ParseException {

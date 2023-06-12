@@ -20,4 +20,7 @@ public class GameStatusDto {
 
     @JsonProperty("answers")
     private List<AnswerDto> answers;
+
+    @JsonProperty("hasEnded")
+    private boolean hasEnded;
 }

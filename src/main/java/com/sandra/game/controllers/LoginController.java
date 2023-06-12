@@ -1,6 +1,7 @@
 package com.sandra.game.controllers;
 
 import com.sandra.game.entities.User;
+import com.sandra.game.exceptions.NotAuthorizedException;
 import com.sandra.game.exceptions.NotFoundException;
 import com.sandra.game.requests.NewUserForm;
 import com.sandra.game.requests.UserLogin;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,5 +42,32 @@ public class LoginController {
         HttpSession session = sessionRequest.getSession();
         session.setAttribute("user", user.getId());
         return ResponseEntity.ok(user.getId());
+    }
+
+    @GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> automaticLogin(HttpServletRequest sessionRequest){
+
+        // recoger user id
+        HttpSession session = sessionRequest.getSession();
+        String userId = (String) session.getAttribute("user");
+
+        if (userId == null) {
+            throw new NotAuthorizedException();
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping(value= "/logout", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Void> logout(HttpServletRequest sessionRequest){
+
+        HttpSession session = sessionRequest.getSession();
+        String userId = (String) session.getAttribute("user");
+
+        if(userId != null && !userId.isEmpty()){
+            session.invalidate();
+        }
+
+        return ResponseEntity.ok().build();
     }
 }
